@@ -9,6 +9,8 @@
   --lt-c1: #F6F5F2; /* background color */
   --lt-c2: #BAAA81;
   --lt-c3: #705130;
+  --size-photos: ;
+  --size-timeline: calc();
 }
 
 @keyframes fadeIn {
@@ -99,6 +101,7 @@ h2 {
 
 p {
   font-size: 1.4rem;
+  /* width: 250px; */
 }
 
 .line-timeline {
@@ -107,7 +110,6 @@ p {
   z-index: -1;
   border-right: var(--lt-font) solid 3px;
   width: 50vw;
-  height: 310vh;
   /* background-color: aquamarine; */
 }
 
@@ -171,12 +173,14 @@ footer {
 
 footer h2 {
   margin: 0;
+  padding: 0;
 }
 
 
 @media screen and (min-width: 773px) {
   .line-timeline {
     top: 230px;
+    height: 310vh;
     /* height: 3200px; */
   }
   
@@ -211,6 +215,7 @@ footer h2 {
 @media screen and (max-width: 772px) {
   .line-timeline {
     top: 200px;
+    height: 210vh;
     /* height: 1800px; */
   }
 
