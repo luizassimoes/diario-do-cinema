@@ -31,6 +31,7 @@
 html {
   font-size: 62.5%;
   overflow-x: hidden;
+  height: 100%;
 }
 
 
@@ -42,6 +43,7 @@ body {
   background-color: var(--lt-c1);
   display: grid;
   justify-content: center;
+  height: 100%;
 }
 
 main {
@@ -89,13 +91,6 @@ h1 {
   color: var(--lt-c3);
 }
 
-.final-phrase {
-  font-size: 2.2rem;
-  width: 100%;
-  padding-top: 60px;
-  text-shadow: 0px 0px 0px;
-}
-
 h2 {
   font-size: 1.6rem;
   color: var(--lt-font);
@@ -112,6 +107,7 @@ p {
   z-index: -1;
   border-right: var(--lt-font) solid 3px;
   width: 50vw;
+  height: 310vh;
   /* background-color: aquamarine; */
 }
 
@@ -157,6 +153,14 @@ p {
   animation: fadeIn 1s ease-in-out;
 }
 
+.final-phrase {
+  font-size: 2.2rem;
+  width: 100%;
+  padding: 50px 0 30px 0;
+  margin: 0;
+  text-shadow: 0px 0px 0px;
+}
+
 footer {
   height: 70px;
   background-color: var(--lt-c2);
@@ -173,7 +177,7 @@ footer h2 {
 @media screen and (min-width: 773px) {
   .line-timeline {
     top: 230px;
-    height: 3200px;
+    /* height: 3200px; */
   }
   
   .pic {
@@ -207,7 +211,7 @@ footer h2 {
 @media screen and (max-width: 772px) {
   .line-timeline {
     top: 200px;
-    height: 1800px;
+    /* height: 1800px; */
   }
 
   .pic {
