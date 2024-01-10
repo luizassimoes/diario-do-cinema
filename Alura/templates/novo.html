@@ -1,0 +1,27 @@
+{% extends "template.html" %}
+{% block conteudo %}
+      <form action="{{ url_for('processing_new') }}" method="post">
+        <fieldset>
+          <div class="form-group">
+            <label for="movie">Filme</label>
+            <input type="text" id="movie" name="movie" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="date">Visto?</label>
+            <input type="text" id="date" name="date" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="grade1">Nota Lu</label>
+            <input type="text" id="grade1" name="grade1" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="grade2">Nota Thi</label>
+            <input type="text" id="grade2" name="grade2" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+        </fieldset>
+      </form>
+    </div>
+</body>
+</html>
+{% endblock %}
