@@ -9,6 +9,7 @@
                     <th>Nota Thi</th>
                     <th>Média</th>
                     <th>DP</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -20,6 +21,7 @@
                     <td>{{movie.grade2 if movie.date != None else '-'}}</td>
                     <td>{{calculation.avg if calculation.date != None else '-'}}</td>
                     <td>{{calculation.sd if calculation.date != None else '-'}}</td>
+                    <td><a href="{{ url_for('edit') }}">Editar</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

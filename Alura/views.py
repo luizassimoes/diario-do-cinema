@@ -11,6 +11,10 @@ def index():
     movies_query = db.session.query(Movies, Calculations).outerjoin(Calculations, Movies.id == Calculations.id).all()
     return render_template('lista.html', title='Locadora', movies=movies_query)
 
+@app.route('/new')
+def new():
+    return render_template('novo.html', title='Novo filme')
+
 @app.route('/processing_new', methods=['POST',])
 def processing_new():
     movie = request.form['movie']
@@ -35,6 +39,10 @@ def processing_new():
 
     return redirect(url_for('index'))
 
-@app.route('/new')
-def new():
-    return render_template('novo.html', title='Novo filme')
+@app.route('/edit')
+def edit():
+    return render_template('edit.html', title='Editar o filme')
+
+@app.route('/processing_edit', methods=['POST',])
+def processing_edit():
+    pass
