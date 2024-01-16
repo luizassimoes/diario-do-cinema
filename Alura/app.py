@@ -6,68 +6,6 @@ import pandas as pd
 from datetime import datetime
 from urllib.parse import quote_plus
 
-# class Movie():
-#     def __init__(self, nome, data, nota1, nota2):
-#         self.__name = nome
-#         self.__date = pd.to_datetime(data, format='%d%m%Y', errors='ignore') if data != '' else '-'
-#         self.__grade1 = float(nota1) if nota1 != '' else '-'
-#         self.__grade2 = float(nota2) if nota2 != '' else '-'
-    
-#     @property
-#     def name(self):
-#         return self.__name
-    
-#     @property
-#     def date(self):
-#         return self.__date
-    
-#     @property
-#     def grade1(self):
-#         return self.__grade1
-    
-#     @property
-#     def grade2(self):
-#         return self.__grade2
-    
-#     @property
-#     def avg(self):
-#         if self.__date != '-':
-#             return (self.__grade1 + self.__grade2) / 2
-#         else:
-#             return '-'
-    
-#     @property
-#     def sd(self): #standard deviation
-#         if self.__date != '-':
-#             sd1 = (self.grade1 - self.avg)**2
-#             sd2 = (self.grade2 - self.avg)**2
-#             return math.sqrt( (sd1 + sd2) / 2 )
-#         else: 
-#             return '-'
-
-
-# class User():
-#     def __init__(self, user, password):
-#         self.__username = user
-#         self.__password = password
-        
-#     @property
-#     def username(self):
-#         return self.__username
-
-     
-# thiago = User('thiago', 'euamoluiza')
-# luiza = User('luiza', 'euamothiago')
-
-# users = {
-#     luiza.username: luiza,
-#     thiago.username: thiago
-#     }
-
-# movie1 = Movie('Voo noturno', '10-07-2022', 7.5, 7)
-# movie2 = Movie('Um crime de mestre', '12-07-2022', 8.5, 8.5)
-# movies = [movie1, movie2]
-
 app = Flask(__name__)
 app.secret_key = 'LuEThi_Filminhos'
 
@@ -106,8 +44,8 @@ class Calculations(db.Model):
 
 @app.route('/')
 def index():
-    movies = Movies.query.order_by(Movies.date).all()
-    return render_template('lista.html', title='Locadora', movies=movies)
+    movies_query = db.session.query(Movies, Calculations).outerjoin(Calculations, Movies.id == Calculations.id).all()
+    return render_template('lista.html', title='Locadora', movies=movies_query)
 
 @app.route('/processing_new', methods=['POST',])
 def processing_new():
