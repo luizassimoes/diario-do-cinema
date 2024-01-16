@@ -21,7 +21,7 @@
                     <td>{{movie.grade2 if movie.date != None else '-'}}</td>
                     <td>{{calculation.avg if calculation.date != None else '-'}}</td>
                     <td>{{calculation.sd if calculation.date != None else '-'}}</td>
-                    <td><a href="{{ url_for('edit') }}">Editar</a></td>
+                    <td><a href="{{ url_for('edit', id=movie.id) }}">Editar</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
