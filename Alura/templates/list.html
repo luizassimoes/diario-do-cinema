@@ -10,6 +10,7 @@
                     <th>Média</th>
                     <th>DP</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,7 @@
                     <td>{{calculation.avg if calculation.date != None else '-'}}</td>
                     <td>{{calculation.sd if calculation.date != None else '-'}}</td>
                     <td><a href="{{ url_for('edit', id=movie.id) }}">Editar</a></td>
+                    <td><a href="{{ url_for('delete', id=movie.id) }}">Excluir</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

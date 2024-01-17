@@ -53,6 +53,14 @@ def edit(id):
     movie = Movies.query.filter_by(id=id).first()
     return render_template('edit.html', title='Editar o filme', movie=movie)
 
+@app.route('/delete/<int:id>')
+def delete(id):
+    Movies.query.filter_by(id=id).delete()
+    Calculations.query.filter_by(id=id).delete()
+    db.session.commit()
+    flash('Filme deletado :(')
+    return redirect(url_for('index'))
+
 @app.route('/processing_edit', methods=['POST',])
 def processing_edit():
     movie = Movies.query.filter_by(id=request.form['id']).first()
