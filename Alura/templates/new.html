@@ -1,6 +1,7 @@
 {% extends "template.html" %}
 {% block conteudo %}
-      <form action="{{ url_for('processing_new') }}" method="post">
+      <form action="{{ url_for('processing_new') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*">
         <fieldset>
           <div class="form-group">
             <label for="movie">Filme</label>
