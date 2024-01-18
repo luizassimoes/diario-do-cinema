@@ -17,11 +17,11 @@
                 {%for movie, calculation in movies%}
                 <tr>
                     <td>{{movie.name}}</td>
-                    <td>{{movie.date.strftime('%d/%m/%Y') if movie.date != None else '-'}}</td>
-                    <td>{{movie.grade1 if movie.date != None else '-'}}</td>
-                    <td>{{movie.grade2 if movie.date != None else '-'}}</td>
-                    <td>{{calculation.avg if calculation.date != None else '-'}}</td>
-                    <td>{{calculation.sd if calculation.date != None else '-'}}</td>
+                    <td>{{movie.date.strftime('%d/%m/%Y') if movie.date else '-'}}</td>
+                    <td>{{movie.grade1 if movie.date else '-'}}</td>
+                    <td>{{movie.grade2 if movie.date else '-'}}</td>
+                    <td>{{calculation.avg if movie.date else '-'}}</td>
+                    <td>{{calculation.sd if movie.date else '-'}}</td>
                     <td><a href="{{ url_for('edit', id=movie.id) }}">Editar</a></td>
                     <td><a href="{{ url_for('delete', id=movie.id) }}">Excluir</a></td>
                 </tr>
