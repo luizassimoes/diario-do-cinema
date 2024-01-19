@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, DecimalField, DateField, validators 
+from wtforms import StringField, SubmitField, DecimalField, DateField, FileField, validators 
 import math
 
 from app import app
@@ -10,7 +10,8 @@ class MovieForm(FlaskForm):
     name = StringField('Nome do Filme', [validators.DataRequired(), validators.Length(min=1, max=100)])
     date = DateField('Visto em?')
     grade1 = DecimalField('Nota Lu')
-    grade2 = DecimalField('Nota Thi')
+    grade2 = DecimalField('Nota Thi') 
+    image = FileField('Foto')    
     submit = SubmitField('Salvar')
 
 
