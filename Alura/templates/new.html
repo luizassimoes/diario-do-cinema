@@ -3,24 +3,25 @@
       <form action="{{ url_for('processing_new') }}" method="post" enctype="multipart/form-data">
         <input type="file" name="image" accept="image/*">
         <fieldset>
+          {{ form.csrf_token() }}
           <div class="form-group">
-            <label for="movie">Filme</label>
-            <input type="text" id="movie" name="name" class="form-control">
+            {{ form.name.label(class="form-label") }}
+            {{ form.name(class="form-control") }}
           </div>
           <div class="form-group">
-            <label for="date">Visto?</label>
-            <input type="text" id="date" name="date" class="form-control">
+            {{ form.date.label(class="form-label") }}
+            {{ form.date(class="form-control") }}
           </div>
           <div class="form-group">
-            <label for="grade1">Nota Lu</label>
-            <input type="text" id="grade1" name="grade1" class="form-control">
+            {{ form.grade1.label(class="form-label") }}
+            {{ form.grade1(class="form-control") }}
           </div>
           <div class="form-group">
-            <label for="grade2">Nota Thi</label>
-            <input type="text" id="grade2" name="grade2" class="form-control">
+            {{ form.grade2.label(class="form-label") }}
+            {{ form.grade2(class="form-control") }}
           </div>
-          <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
-          <a class="btn btn-primary" href="{{ url_for('index') }}">Voltar</a>
+          {{ form.submit(class="btn btn-primary") }}
+          <a class="btn btn-secondary" href="{{ url_for('index') }}">Voltar</a>
         </fieldset>
       </form>
     </div>

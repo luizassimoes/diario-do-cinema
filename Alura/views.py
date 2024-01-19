@@ -1,25 +1,12 @@
 from flask import render_template, request, redirect, session, flash, url_for
 from sqlalchemy import desc
-import math
 import pandas as pd
 from datetime import datetime
 
 from app import app, db
 from model.movies import *
 from model.calculations import *
-
-def avg_sd(grade1, grade2):
-    if grade1 is None:
-        return None, None
-    
-    g1 = float(grade1)
-    g2 = float(grade2)
-    avg = (g1 + g2) / 2
-    sd1 = (g1 - avg)**2
-    sd2 = (g2 - avg)**2
-    sd = math.sqrt( (sd1 + sd2) / 2 )
-
-    return avg, sd
+from helpers import avg_sd, MovieForm
 
 
 @app.route('/')
@@ -29,51 +16,62 @@ def index():
 
 @app.route('/new')
 def new():
-    return render_template('new.html', title='Novo filme')
+    form = MovieForm()
+    return render_template('new.html', title='Novo filme', form=form)
 
 @app.route('/processing_new', methods=['POST',])
 def processing_new():
-    movie  = request.form['name']
-    date   = request.form['date'].strptime(date, '%d/%m/%Y') if request.form['date'] else None
-    grade1 = float(request.form['grade1']) if request.form['grade1'] else None 
-    grade2 = float(request.form['grade2']) if request.form['grade2'] else None 
+    form = MovieForm(request.form)
+
+    movie  = form.name.data
+    date   = form.date.data if form.date.data else None
+    grade1 = float(form.grade1.data) if form.grade1.data else None 
+    grade2 = float(form.grade2.data) if form.grade2.data else None 
     image  = request.files['image'].read() if request.files['image'] else None     # O read faz a leitura dos Bytes da imagem    
-    print('-------------------------', image)
     new_movie = Movies(name=movie, date=date, grade1=grade1, grade2=grade2, image=image)
     db.session.add(new_movie)
     db.session.commit()
-
+    
     avg, sd = avg_sd(grade1=grade1, grade2=grade2)
-    new_calculations = Calculations(name=movie, avg=avg, sd=sd)
+    new_calculations = Calculations(id=new_movie.id, name=movie, avg=avg, sd=sd)
 
     db.session.add(new_calculations)
     db.session.commit()
-
+    
     return redirect(url_for('index'))
 
 @app.route('/edit/<int:id>')
 def edit(id):
     movie = Movies.query.filter_by(id=id).first()
-    return render_template('edit.html', title='Editar o filme', movie=movie)
+    form = MovieForm()
+    form.name.data = movie.name
+    form.date.data = movie.date
+    form.grade1.data = movie.grade1
+    form.grade2.data = movie.grade2
+
+    return render_template('edit.html', title='Editar o filme', movie=movie, form=form)
 
 @app.route('/processing_edit', methods=['POST',])
 def processing_edit():
-    movie        = Movies.query.filter_by(id=request.form['id']).first()
-    movie.name   = request.form['name']
-    movie.date   = datetime.strptime(request.form['date'], '%d/%m/%Y')
-    movie.grade1 = request.form['grade1']
-    movie.grade2 = request.form['grade2']
-    movie.image  = request.files['image'].read() if request.files['image'].read() else None
+    form = MovieForm()
 
-    avg, sd = avg_sd(grade1=movie.grade1, grade2=movie.grade2)
-    calculus = Calculations.query.filter_by(id=request.form['id']).first()
-    calculus.avg = avg
-    calculus.sd = sd
+    if form.validate_on_submit():
+        movie        = Movies.query.filter_by(id=request.form['id']).first()
+        movie.name   = form.name.data
+        movie.date   = form.date.data
+        movie.grade1 = form.grade1.data
+        movie.grade2 = form.grade2.data
+        movie.image  = request.files['image'].read() if request.files['image'].read() else None
 
-    db.session.add(movie)
-    db.session.commit()
-    db.session.add(calculus)
-    db.session.commit()
+        avg, sd = avg_sd(grade1=movie.grade1, grade2=movie.grade2)
+        calculus = Calculations.query.filter_by(id=request.form['id']).first()
+        calculus.avg = avg
+        calculus.sd = sd
+
+        db.session.add(movie)
+        db.session.commit()
+        db.session.add(calculus)
+        db.session.commit()
 
     return redirect(url_for('index'))
 
