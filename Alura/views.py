@@ -12,7 +12,7 @@ from helpers import avg_sd, MovieForm
 @app.route('/')
 def index():
     movies_query = db.session.query(Movies, Calculations).outerjoin(Calculations, Movies.id == Calculations.id).order_by(desc(Movies.date)).all()
-    return render_template('list.html', title='Locadora', movies=movies_query)
+    return render_template('list.html', title='Diário do Cinema', movies=movies_query)
 
 @app.route('/new')
 def new():
@@ -39,6 +39,11 @@ def processing_new():
     db.session.commit()
     
     return redirect(url_for('index'))
+
+@app.route('/to-watch')
+def to_watch():
+    movies_query = db.session.query(Movies, Calculations).outerjoin(Calculations, Movies.id == Calculations.id).order_by(desc(Movies.date)).all()
+    return render_template('to_watch.html', title='Locadora', movies=movies_query)
 
 @app.route('/edit/<int:id>')
 def edit(id):
