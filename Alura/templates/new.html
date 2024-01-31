@@ -1,6 +1,12 @@
 {% extends "template.html" %}
 {% block conteudo %}
-      <form action="{{ url_for('processing_new') }}" method="post" enctype="multipart/form-data">
+
+  <div class="page-header center-title">
+    <img src="../static/images/Novo_Filme.svg" alt="" class="locadora">
+    <!-- <h1>{{ title }}</h1> -->
+  </div>
+
+      <form action="{{ url_for('processing_new') }}" method="post" enctype="multipart/form-data" class="form-style">
         <fieldset>
           {{ form.csrf_token() }}
           <div class="form-group">
@@ -23,8 +29,8 @@
             {{ form.image.label(class="form-label") }}
             {{ form.image(class="form-control") }}
           </div>
-          {{ form.submit(class="btn btn-primary") }}
-          <a class="btn btn-secondary" href="{{ url_for('index') }}">Voltar</a>
+          {{ form.submit(class="btn c3") }}
+          <a class="btn c3" href="{{ url_for('index') }}">Voltar</a>
         </fieldset>
       </form>
     </div>
