@@ -12,7 +12,7 @@ from helpers import avg_sd, MovieForm
 @app.route('/')
 def index():
     movies_query = db.session.query(Movies, Calculations).outerjoin(Calculations, Movies.id == Calculations.id).order_by(desc(Movies.date)).all()
-    return render_template('list.html', title='Diário do Cinema', movies=movies_query)
+    return render_template('index.html', title='Diário do Cinema', movies=movies_query)
 
 @app.route('/new')
 def new():
