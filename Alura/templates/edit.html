@@ -1,5 +1,11 @@
 {% extends "template.html" %}
 {% block conteudo %}
+
+  <div class="page-header center-title">
+    <img src="../static/images/Editar.svg" alt="" class="locadora">
+    <!-- <h1>{{ title }}</h1> -->
+  </div>
+
       <form action="{{ url_for('processing_edit') }}" method="post" enctype="multipart/form-data">
         <!-- <input type="file" name="image" accept=".jpg"> -->
         <fieldset>
