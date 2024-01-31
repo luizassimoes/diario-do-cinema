@@ -1,0 +1,68 @@
+body {
+    background-color: var(--c2);
+}
+
+.diario-do-cinema, .locadora {
+    width: 20vw;
+}
+
+.diario-do-cinema {
+    margin: 15px 0;
+}
+
+.c1 {
+    background-color: var(--c1);
+}
+
+.c2 {
+    background-color: var(--c2);
+}
+
+.c3 {
+    background-color: var(--c3);
+}
+
+.c4 {
+    background-color: var(--c4);
+}
+
+.c5 {
+    background-color: var(--c5);
+}
+
+.c6 {
+    background-color: var(--c6);
+}
+
+.c7 {
+    background-color: var(--c7);
+}
+
+.btn {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    margin: 10px 1px;
+}
+
+.btn:hover {
+    background-color: var(--c1);
+}
+
+.header-btns{
+    width: fit-content;
+}
+
+.header-btns .buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.form-style {
+    margin: 20px;
+}
+
+.center-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
