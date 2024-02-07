@@ -1,0 +1,48 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+        <div class="header-btns d-flex flex-column align-items-center">
+            <div class="page-header col-6 col-md-4 text-center mx-auto">
+                    <img src="../static/images/Diario_do_Cinema.svg" alt="" class="m-4 rounded-0 col-10 col-md-8"/>
+            </div>
+            
+            <div class="buttons mb-5">
+                <a class="btn c3 mx-3 hover-c1" href="{{ url_for('new') }}">Novo Filme</a>
+                <a class="btn c3 mx-3 hover-c1" href="{{ url_for('to_watch') }}">Para assistir</a>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table class="table table-striped table-responsive table-bordered">
+                <thead class="thead-default">
+                    <tr>
+                        <th class="c1">Filme</th>
+                        <th>Visto?</th>
+                        <th>Nota Lu</th>
+                        <th>Nota Thi</th>
+                        <th>Média</th>
+                        <th>DP</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for movie in movies%}
+                        {%if movie.date%}
+                            <tr>
+                                <td>{{movie.name}}</td>
+                                <td>{{movie.date.strftime('%d/%m/%Y')}}</td>
+                                <td>{{movie.grade1}}</td>
+                                <td>{{movie.grade2}}</td>
+                                <td>{{movie.avg}}</td>
+                                <td>{{movie.sd}}</td>
+                                <td><a href="{{ url_for('edit', id=movie.id) }}">Editar</a></td>
+                                <td><a href="{{ url_for('delete', id=movie.id) }}">Excluir</a></td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+{% endblock %}
