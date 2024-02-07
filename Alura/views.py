@@ -5,14 +5,13 @@ from datetime import datetime
 
 from app import app, db
 from model.movies import *
-from model.calculations import *
 from helpers import avg_sd, MovieForm
 
 
-@app.route('/')
-def index():
-    movies_query = db.session.query(Movies, Calculations).outerjoin(Calculations, Movies.id == Calculations.id).order_by(desc(Movies.date)).all()
-    return render_template('index.html', title='Diário do Cinema', movies=movies_query)
+@app.route('/') # movies')
+def movie_index():
+    movies_query = db.session.query(Movies).order_by(desc(Movies.date)).all()
+    return render_template('movie_index.html', title='Diário do Cinema', movies=movies_query)
 
 @app.route('/new')
 def new():
@@ -27,22 +26,17 @@ def processing_new():
     date   = form.date.data if form.date.data else None
     grade1 = float(form.grade1.data) if form.grade1.data else None 
     grade2 = float(form.grade2.data) if form.grade2.data else None 
-    image  = request.files['image'].read() if request.files['image'] else None     # O read faz a leitura dos Bytes da imagem    
-    new_movie = Movies(name=movie, date=date, grade1=grade1, grade2=grade2, image=image)
+    image  = request.files['image'].read() if request.files['image'] else None     # O read faz a leitura dos Bytes da imagem 
+    avg, sd = avg_sd(grade1=grade1, grade2=grade2)
+    new_movie = Movies(name=movie, date=date, grade1=grade1, grade2=grade2, image=image, avg=avg, sd=sd)
     db.session.add(new_movie)
     db.session.commit()
     
-    avg, sd = avg_sd(grade1=grade1, grade2=grade2)
-    new_calculations = Calculations(id=new_movie.id, name=movie, avg=avg, sd=sd)
-
-    db.session.add(new_calculations)
-    db.session.commit()
-    
-    return redirect(url_for('index'))
+    return redirect(url_for('movie_index'))
 
 @app.route('/to-watch')
 def to_watch():
-    movies_query = db.session.query(Movies, Calculations).outerjoin(Calculations, Movies.id == Calculations.id).order_by(desc(Movies.date)).all()
+    movies_query = db.session.query(Movies).order_by(desc(Movies.date)).all()
     return render_template('to_watch.html', title='Locadora', movies=movies_query)
 
 @app.route('/edit/<int:id>')
@@ -69,21 +63,17 @@ def processing_edit():
         movie.image  = request.files['image'].read() if request.files['image'].read() else None
 
         avg, sd = avg_sd(grade1=movie.grade1, grade2=movie.grade2)
-        calculus = Calculations.query.filter_by(id=request.form['id']).first()
-        calculus.avg = avg
-        calculus.sd = sd
+        movie.avg = avg
+        movie.sd = sd
 
         db.session.add(movie)
         db.session.commit()
-        db.session.add(calculus)
-        db.session.commit()
 
-    return redirect(url_for('index'))
+    return redirect(url_for('movie_index'))
 
 @app.route('/delete/<int:id>')
 def delete(id):
     Movies.query.filter_by(id=id).delete()
-    Calculations.query.filter_by(id=id).delete()
     db.session.commit()
     flash('Filme deletado :(')
-    return redirect(url_for('index'))
+    return redirect(url_for('movie_index'))
