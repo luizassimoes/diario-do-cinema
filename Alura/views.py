@@ -36,7 +36,7 @@ def processing_new():
 
 @app.route('/to-watch')
 def to_watch():
-    movies_query = db.session.query(Movies).order_by(desc(Movies.date)).all()
+    movies_query = db.session.query(Movies).order_by(desc(Movies.id)).all()
     return render_template('to_watch.html', title='Locadora', movies=movies_query)
 
 @app.route('/edit/<int:id>')
@@ -54,20 +54,23 @@ def edit(id):
 def processing_edit():
     form = MovieForm()
 
-    if form.validate_on_submit():
-        movie        = Movies.query.filter_by(id=request.form['id']).first()
-        movie.name   = form.name.data
-        movie.date   = form.date.data
-        movie.grade1 = form.grade1.data
-        movie.grade2 = form.grade2.data
-        movie.image  = request.files['image'].read() if request.files['image'].read() else None
+    movie        = Movies.query.filter_by(id=request.form['id']).first()
+    movie.name   = form.name.data
+    movie.date   = form.date.data
+    movie.grade1 = form.grade1.data
+    movie.grade2 = form.grade2.data
+    movie.image  = request.files['image'].read() if request.files['image'].read() else None
 
+    if pd.notna(movie.date):
         avg, sd = avg_sd(grade1=movie.grade1, grade2=movie.grade2)
         movie.avg = avg
         movie.sd = sd
+    else:
+        movie.avg = None
+        movie.sd = None
 
-        db.session.add(movie)
-        db.session.commit()
+    db.session.add(movie)
+    db.session.commit()
 
     return redirect(url_for('movie_index'))
 
