@@ -12,31 +12,38 @@
             </div>
         </div>
 
-        <div class="table-container">
-            <table class="table table-striped table-responsive table-bordered">
-                <thead class="thead-default">
+        <div class="table-container d-flex flex-column justify-content-center border-10px">
+            <table>
+                <thead class="thead-default c3">
                     <tr>
-                        <th class="c1">Filme</th>
-                        <th>Visto?</th>
-                        <th>Nota Lu</th>
-                        <th>Nota Thi</th>
-                        <th>Média</th>
-                        <th>DP</th>
+                        <th><span class="table-column-title m-1">Filme</span></th>
+                        <th><span class="table-column-title m-1 d-flex justify-content-center">Visto?</span></th>
+                        <th><span class="table-column-title m-1 d-flex justify-content-center">Nota Lu</span></th>
+                        <th><span class="table-column-title m-1 d-flex justify-content-center">Nota Thi</span></th>
+                        <th><span class="table-column-title m-1 d-flex justify-content-center">Média</span></th>
+                        <th><span class="table-column-title m-1 d-flex justify-content-center">DP</span></th>
                         <th></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {%for movie in movies%}
+                    {% for movie in movies %} 
+                        {% if loop.index is even %}
+                            <tr style="background-color: #faf4e4;">
+                        {% else %}
+                            <tr style="background-color: #ede3b6;">
+                        {% endif %} 
+
                         {%if movie.date%}
-                            <tr>
-                                <td>{{movie.name}}</td>
-                                <td>{{movie.date.strftime('%d/%m/%Y')}}</td>
-                                <td>{{movie.grade1}}</td>
-                                <td>{{movie.grade2}}</td>
-                                <td>{{movie.avg}}</td>
-                                <td>{{movie.sd}}</td>
-                                <td><a href="{{ url_for('edit', id=movie.id) }}">Editar</a></td>
+                                <td class="p-1">{{movie.name}}</td>
+                                <td class="text-center">{{movie.date.strftime('%d/%m/%Y')}}</td>
+                                <td class="text-center">{{movie.grade1}}</td>
+                                <td class="text-center">{{movie.grade2}}</td>
+                                <td class="text-center">{{movie.avg}}</td>
+                                <td class="text-center">{{movie.sd}}</td>
+                                <!-- <td class="ps-4" style="background-color: var(--lt-c2);"><a class="btn c1 hover-c3" href="{{ url_for('edit', id=movie.id) }}">Editar</a></td>
+                                <td style="background-color: var(--lt-c2);"><a class="btn c1 hover-c3" href="{{ url_for('delete', id=movie.id) }}">Excluir</a></td> -->
+                                <td class="px-3"><a href="{{ url_for('edit', id=movie.id) }}">Editar</a></td>
                                 <td><a href="{{ url_for('delete', id=movie.id) }}">Excluir</a></td>
                             </tr>
                         {% endif %}
@@ -44,5 +51,5 @@
                 </tbody>
             </table>
         </div>
-        
+
 {% endblock %}
