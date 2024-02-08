@@ -21,7 +21,7 @@
             <table>
                 <thead class="thead-default c3">
                     <tr>
-                        <th><span class="table-column-title m-1">Filme</span></th>
+                        <th><span class="table-column-title m-1 ms-0 ps-3">Filme</span></th>
                         <th><span class="table-column-title m-1 d-flex justify-content-center">Visto?</span></th>
                         <th><span class="table-column-title m-1 d-flex justify-content-center">Nota Lu</span></th>
                         <th><span class="table-column-title m-1 d-flex justify-content-center">Nota Thi</span></th>
@@ -40,7 +40,7 @@
                         {% endif %} 
 
                         {%if movie.date%}
-                                <td class="p-1">{{movie.name}}</td>
+                                <td class="p-1 ps-3">{{movie.name}}</td>
                                 <td class="text-center">{{movie.date.strftime('%d/%m/%Y')}}</td>
                                 <td class="text-center">{{movie.grade1}}</td>
                                 <td class="text-center">{{movie.grade2}}</td>
