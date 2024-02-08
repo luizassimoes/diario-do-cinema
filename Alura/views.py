@@ -87,6 +87,6 @@ def processing_edit():
 def delete(id):
     Movies.query.filter_by(id=id).delete()
     db.session.commit()
-    flash('Filme deletado :(')
+    flash('Filme excluído.')
     next_page = request.args['next_page']
     return redirect(url_for(next_page))
