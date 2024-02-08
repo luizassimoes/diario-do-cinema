@@ -1,68 +1,69 @@
+.bg-navbar {
+    background-color: var(--c2);
+}
+
 body {
-    background-color: var(--c2);
+    background-color: var(--lt-c2);
+    overflow-x: hidden;
 }
 
-.diario-do-cinema, .locadora {
-    width: 20vw;
+
+.c1 {background-color: var(--c1);}
+.font-c1 {color: var(--c1);}
+.hover-c1:hover {background-color: var(--c1);}
+
+.c2 {background-color: var(--c2);}
+.font-c2 {color: var(--c2);}
+.hover-c2:hover {background-color: var(--c2);}
+
+.c3 {background-color: var(--c3);}
+.font-c3 {color: var(--c3);}
+.hover-c3:hover {background-color: var(--c3);}
+
+.c4 {background-color: var(--c4);}
+.font-c4 {color: var(--c4);}
+
+.c5 {background-color: var(--c5);}
+.font-c5 {color: var(--c5);}
+
+.c6 {background-color: var(--c6);}
+.font-c6 {color: var(--c6);}
+
+.c7 {background-color: var(--c7);}
+.font-c7 {color: var(--c7);}
+
+.img-logo {
+    max-height: 60px;
 }
 
-.diario-do-cinema {
-    margin: 15px 0;
+.nav-item, .nav-link {
+    border-radius: 10px;
+
 }
 
-.c1 {
-    background-color: var(--c1);
-}
-
-.c2 {
-    background-color: var(--c2);
-}
-
-.c3 {
+.nav-item:hover, .nav-link:hover {
+    color: var(--c1);
     background-color: var(--c3);
+    border-radius: 10px;
 }
 
-.c4 {
-    background-color: var(--c4);
+.table-container {
+    overflow-x: auto;
 }
 
-.c5 {
-    background-color: var(--c5);
+.table-column-title {
+    font-size: 1.4rem;
 }
 
-.c6 {
-    background-color: var(--c6);
+.border-10px {
+    border-radius: 10px;
 }
 
-.c7 {
-    background-color: var(--c7);
+.btn-none {
+    cursor: none;
 }
 
-.btn {
-    opacity: 1;
-    transition: opacity 0.3s ease;
-    margin: 10px 1px;
-}
-
-.btn:hover {
-    background-color: var(--c1);
-}
-
-.header-btns{
-    width: fit-content;
-}
-
-.header-btns .buttons {
-    display: flex;
-    justify-content: space-around;
-}
-
-.form-style {
-    margin: 20px;
-}
-
-.center-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.btn-none:hover {
+    cursor: default;
+    background-color: var(--c3);
 }
