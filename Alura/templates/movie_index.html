@@ -5,10 +5,15 @@
             <div class="page-header col-6 col-md-4 text-center mx-auto">
                     <img src="../static/images/Diario_do_Cinema.svg" alt="" class="m-4 rounded-0 col-10 col-md-8"/>
             </div>
+        </div>
             
-            <div class="buttons mb-5">
-                <a class="btn c3 mx-3 hover-c1" href="{{ url_for('new') }}">Novo Filme</a>
-                <a class="btn c3 mx-3 hover-c1" href="{{ url_for('to_watch') }}">Para assistir</a>
+        <div class="buttons-container d-flex justify-content-between">
+            <div class="buttons mb-3">
+                <a class="btn c3 hover-c1" href="{{ url_for('new') }}">Novo Filme</a>
+                <a class="btn c3 mx-2 hover-c1" href="{{ url_for('to_watch') }}">Locadora</a>
+            </div>
+            <div class="buttons rigth flex">
+                <div class="btn btn-none c3 mx-2 mb-4">Assistidos: <b>{{ movies_watched }}</b></div>
             </div>
         </div>
 
@@ -43,8 +48,8 @@
                                 <td class="text-center">{{movie.sd}}</td>
                                 <!-- <td class="ps-4" style="background-color: var(--lt-c2);"><a class="btn c1 hover-c3" href="{{ url_for('edit', id=movie.id) }}">Editar</a></td>
                                 <td style="background-color: var(--lt-c2);"><a class="btn c1 hover-c3" href="{{ url_for('delete', id=movie.id) }}">Excluir</a></td> -->
-                                <td class="px-3"><a href="{{ url_for('edit', id=movie.id) }}">Editar</a></td>
-                                <td><a href="{{ url_for('delete', id=movie.id) }}">Excluir</a></td>
+                                <td class="px-3"><a href="{{ url_for('edit', id=movie.id, next_page='movie_index') }}">Editar</a></td>
+                                <td><a href="{{ url_for('delete', id=movie.id, next_page='movie_index') }}">Excluir</a></td>
                             </tr>
                         {% endif %}
                     {% endfor %}
