@@ -10,8 +10,9 @@ from helpers import avg_sd, MovieForm
 
 @app.route('/') # movies')
 def movie_index():
-    movies_query = db.session.query(Movies).order_by(desc(Movies.date)).all()
-    return render_template('movie_index.html', title='Diário do Cinema', movies=movies_query)
+    movies_query = db.session.query(Movies).filter(Movies.date.isnot(None)).order_by(desc(Movies.date)).all()
+    movies_watched = len(movies_query)
+    return render_template('movie_index.html', title='Diário do Cinema', movies=movies_query, movies_watched=movies_watched)
 
 @app.route('/new')
 def new():
@@ -32,19 +33,23 @@ def processing_new():
     db.session.add(new_movie)
     db.session.commit()
     
-    return redirect(url_for('movie_index'))
+    if date:
+        return redirect(url_for('movie_index'))
+    else:
+        return redirect(url_for('to_watch'))
 
 @app.route('/to-watch')
 def to_watch():
-    movies_query = db.session.query(Movies).order_by(desc(Movies.id)).all()
-    return render_template('to_watch.html', title='Locadora', movies=movies_query)
+    movies_query = db.session.query(Movies).filter(Movies.date.is_(None)).order_by(desc(Movies.id)).all()
+    movies_to_watch = len(movies_query)
+    return render_template('to_watch.html', title='Locadora', movies=movies_query, movies_to_watch=movies_to_watch)
 
 @app.route('/edit/<int:id>')
 def edit(id):
     movie = Movies.query.filter_by(id=id).first()
     form = MovieForm()
-    form.name.data = movie.name
-    form.date.data = movie.date
+    form.name.data   = movie.name
+    form.date.data   = movie.date
     form.grade1.data = movie.grade1
     form.grade2.data = movie.grade2
 
@@ -62,21 +67,26 @@ def processing_edit():
     movie.image  = request.files['image'].read() if request.files['image'].read() else None
 
     if pd.notna(movie.date):
-        avg, sd = avg_sd(grade1=movie.grade1, grade2=movie.grade2)
+        avg, sd   = avg_sd(grade1=movie.grade1, grade2=movie.grade2)
         movie.avg = avg
-        movie.sd = sd
+        movie.sd  = sd
     else:
         movie.avg = None
-        movie.sd = None
+        movie.sd  = None
 
     db.session.add(movie)
     db.session.commit()
 
-    return redirect(url_for('movie_index'))
+    if movie.date:
+        return redirect(url_for('movie_index'))
+    else:
+        return redirect(url_for('to_watch'))
+
 
 @app.route('/delete/<int:id>')
 def delete(id):
     Movies.query.filter_by(id=id).delete()
     db.session.commit()
     flash('Filme deletado :(')
-    return redirect(url_for('movie_index'))
+    next_page = request.args['next_page']
+    return redirect(url_for(next_page))
