@@ -32,7 +32,7 @@
             {{ form.image(class="form-control") }}
           </div>
           {{ form.submit(class="btn c3 ms-3 mt-2 hover-c1") }}
-          <a class="btn c3 mx-3 mt-2 hover-c1" href="{{ url_for('movie_index') }}">Voltar</a>
+          <a class="btn c3 mx-3 mt-2 hover-c1" href="{{ url_for(request.args['next_page']) }}">Voltar</a>
         </fieldset>
       </form>
     </div>
