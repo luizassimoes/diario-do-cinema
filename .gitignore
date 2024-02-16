@@ -1,5 +1,15 @@
 # Ambiente virtual Python
 env/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.pyc
+
+# Arquivo de teste
+teste.ipynb
+
+# Arquivo confidencial
+config.txt
+
+# Arquivos futuros
+sprint+1/
