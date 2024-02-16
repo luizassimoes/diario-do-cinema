@@ -35,35 +35,36 @@
             <li>Atenção! Como o banco de dados está conectado ao localhost, crie um arquivo config.txt com o formato a seguir para ver sua própria lista de filmes.</li>
         </ul>
         <ul>    
-        <table>
-            <tr>
-                <td>SECRET_KEY</td>
-                <td>sua_chave</td>
-            </tr>
-            <tr>
-                <td>senha</td>
-                <td>sua_senha</td>
-            </tr>
-            <tr>
-                <td>SGBD</td>
-                <td>seu_sgbd</td>
-            </tr>
-            <tr>
-                <td>usuario</td>
-                <td>seu_user</td>
-            </tr>
-            <tr>
-                <td>servidor</td>
-                <td>localhost</td>
-            </tr>
-            <tr>
-                <td>database</td>
-                <td>sua_database</td>
-            </tr>
+            <table>
+                <tr>
+                    <td>SECRET_KEY</td>
+                    <td>sua_chave</td>
+                </tr>
+                <tr>
+                    <td>senha</td>
+                    <td>sua_senha</td>
+                </tr>
+                <tr>
+                    <td>SGBD</td>
+                    <td>seu_sgbd</td>
+                </tr>
+                <tr>
+                    <td>usuario</td>
+                    <td>seu_user</td>
+                </tr>
+                <tr>
+                    <td>servidor</td>
+                    <td>localhost</td>
+                </tr>
+                <tr>
+                    <td>database</td>
+                    <td>sua_database</td>
+                </tr>
+            </table>
         </ul>
-    </table>
             
-        <p>Para mais detalhes, consulte o <a href="https://github.com/luizassimoes/lu-e-thi">repositório no GitHub</a> ou entre em <a href="mailto:luizassimoes@hotmail.com">contato</a>.</p>
+        <p>Para mais detalhes, consulte o <a href="https://github.com/luizassimoes/lu-e-thi">repositório no GitHub</a> ou entre em contato através do email <a href="mailto:luizassimoes@hotmail.com">luizassimoes@hotmail.com</a>.</p>
+
     </div>
 </body>
 </html>
