@@ -24,7 +24,7 @@
             <li>HTML, CSS e Bootstrap</li>
             <li>MySQL</li>
         </ul>
-        <p>Para mais detalhes, consulte o <a href="https://github.com/luizassimoes/lu-e-thi">repositório no GitHub</a>.</p>
+        <p>Para mais detalhes, consulte o <a href="https://github.com/luizassimoes/lu-e-thi">repositório no GitHub</a> ou entre em <a href="mailto:luizassimoes@hotmail.com">contato</a>.</p>
     </div>
 </body>
 </html>
