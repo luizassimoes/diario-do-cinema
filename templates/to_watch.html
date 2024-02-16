@@ -1,0 +1,44 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+    <div class="page-header col-6 col-md-4 text-center mx-auto">
+            <img src="../static/images/Locadora.svg" alt="" class="m-4 rounded-0 col-12 col-md-10"/>
+    </div>
+    
+        <div class="buttons-container d-flex justify-content-between">
+            <div class="buttons-left">
+                <a class="btn c3 hover-c1 mb-4" href="{{ url_for('movie_index') }}">Voltar</a>
+                <a class="btn c3 hover-c1 mx-2 mb-4" href="{{ url_for('new', next_page='index') }}">Novo Filme</a>
+            </div>
+            <div class="buttons rigth flex">
+                <div class="btn btn-none c3 mx-2 mb-4">Para assistir: <b>{{ movies_to_watch }}</b></div>
+            </div>
+        </div>
+
+        <div class="table-container d-flex flex-column justify-content-center border-10px">
+            <table>
+                <thead class="thead-default c3">
+                    <tr>
+                        <th><span class="table-column-title m-1">Filme</span></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for movie in movies%}
+                        {% if loop.index is even %}
+                            <tr style="background-color: #faf4e4;">
+                        {% else %}
+                            <tr style="background-color: #ede3b6;">
+                        {% endif %} 
+                        {%if not movie.date%}
+                                <td class="p-1">{{movie.name}}</td>                                
+                                <td class="px-3"><a href="{{ url_for('edit', id=movie.id, next_page='to_watch') }}">Editar</a></td>
+                                <td><a href="{{ url_for('delete', id=movie.id, next_page='to_watch') }}">Excluir</a></td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+{% endblock %}
