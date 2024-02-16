@@ -61,9 +61,9 @@ def processing_edit():
 
     movie        = Movies.query.filter_by(id=request.form['id']).first()
     movie.name   = form.name.data
-    movie.date   = form.date.data
-    movie.grade1 = form.grade1.data
-    movie.grade2 = form.grade2.data
+    movie.date   = form.date.data if form.date.data else None
+    movie.grade1 = float(form.grade1.data) if form.grade1.data else None 
+    movie.grade2 = float(form.grade2.data) if form.grade2.data else None 
     movie.image  = request.files['image'].read() if request.files['image'].read() else None
 
     if pd.notna(movie.date):
