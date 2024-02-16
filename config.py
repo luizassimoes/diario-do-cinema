@@ -1,7 +1,10 @@
 from urllib.parse import quote_plus
+import pandas as pd
 
-SECRET_KEY = 'LuEThi_Filminhos'
-senha = 'lss003@MySQL'
+params = pd.read_csv('config.txt', sep=' = ', header=None, engine='python')
+
+SECRET_KEY = params.loc[params[0] == 'SECRET_KEY'][1].values[0]
+senha = params.loc[params[0] == 'senha'][1].values[0]
 
 SQLALCHEMY_DATABASE_URI = \
            '{SGBD}://{usuario}:{senha}@{servidor}/{database}'.format(
@@ -9,5 +12,5 @@ SQLALCHEMY_DATABASE_URI = \
                usuario = 'root',
                senha = quote_plus(senha),
                servidor = 'localhost',
-               database = 'lu_e_thi'
+               database = params.loc[params[0] == 'database'][1].values[0]
            )
