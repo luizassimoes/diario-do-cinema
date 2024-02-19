@@ -26,7 +26,7 @@ Este é um projeto de software desenvolvido em Python, utilizando o framework Fl
 3. Execute o arquivo `app.py` para iniciar o servidor Flask.
 4. Acesse a aplicação em seu navegador utilizando o endereço [http://localhost:5000](http://localhost:5000).
 
-- Atenção! Como o banco de dados está conectado ao localhost, crie um arquivo config.txt com o formato a seguir para ver sua própria lista de filmes.
+- Atenção! Como o banco de dados ainda está conectado ao localhost, crie um arquivo config.txt com o formato a seguir para ver sua própria lista de filmes.
 
 | Chave       | Valor       |
 |-------------|-------------|
